@@ -1,0 +1,39 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(113, 125, 5);color:white;height: 60px;">
+    <a class="navbar-brand" href="#">MyBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link {{home}}" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {{about}}">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            {% if not request.user.is_authenticated %}
+            <li class="nav-item {{log}}">
+                <a class="nav-link" href="{% url 'userlogin' %}">Login</a>
+            </li>
+            {% else %}
+            <li class="nav-item {{dashboard}}">
+                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            {% endif %}
+        </ul>
+        {% if request.user.is_authenticated %}
+        <span class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-white mx-4" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome {{request.user|capfirst}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'editprofile' %}">Edit Profile</a>
+                <a class="dropdown-item" href="{% url 'resetpassword' %}"> Change Password</a>
+                <a class="dropdown-item" href="{% url 'logout_user' %}"> Logout </a>
+              </div>
+        </span>
+        {% endif %}
+    </div>
+</nav>

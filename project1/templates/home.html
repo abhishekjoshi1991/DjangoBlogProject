@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block maincontent%}
+<div class="container mt-5">
+    <h2> Welcome to Blog Home Page </h2>
+    {% for each in all %}
+    {{each.name}}
+    <div class="bg-light p-5 rounded-lg m-3 border-left border-bottom border-info">
+        <h1 class="display-5">{{each.title}}</h1>
+        <hr class="my-4">
+        <p class="lead">{{each.description}}</p>
+        <small class="pull-right"> <strong>Posted By :</strong> {{ each.user_id | capfirst}}</small>
+    </div>
+    {% endfor %}
+</div>
+{% endblock maincontent %}

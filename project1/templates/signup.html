@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block maincontent%} 
+
+<div class="container mt-2" style="width:50%;">
+    <h2 class="text-center"> Sign Up Form </h2>
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            {{field.label_tag}} {{field}} <span class="err">{{field.errors|striptags}} </span><br>
+        {% endfor %}
+        <input type="submit" class="btn" value="SignUp">
+    </form>
+    <small> Already have account? <a href="{% url 'userlogin' %}">Login Here</a> </small> <br><br>
+</div>
+
+{% endblock maincontent %}

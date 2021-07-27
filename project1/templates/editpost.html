@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block maincontent %}
+
+<div class="container mt-5">
+    <h2> Hey {{request.user|capfirst}} - Edit your Post Here </h2>
+    <div style="width:50%; margin:auto;" class="mt-5">
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn" value="Update">
+    </form>
+</div>
+</div>
+{% endblock maincontent %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block maincontent%}
+
+<div class="container mt-5">
+    <h2> Welcome to Dashboard Page - {{request.user|capfirst}} </h2>
+    <h4 class="my-3 alert alert-primary"> Your Blogs <i class="fa fa-arrow-down"></i></h4>
+    <a href="{% url 'addpost' %}" class="btn btn-success mb-2 float-right"> Add New Post</a> <br><br>
+    {% include 'messages.html' %}
+    {% if specific_data %}
+    <table class="table table-hover">
+        <thead>
+            <th>Title</th>
+            <th>Description</th>
+            {% if request.user.is_superuser %}
+            <th>Posted By</th>
+            {% endif %}
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for each in specific_data %}
+            <tr>
+                <td>{{ each.title }}</td>
+                <td>{{ each.description }}</td>
+                {% if request.user.is_superuser %}
+                <td>
+                    {{ each.user_id }}
+                </td>
+                {% endif %}
+                <td><a href="{% url 'editpost' each.id %}" class="btn btn-warning" title="Edit"> <i
+                            class="fa fa-pencil"></i> </a>
+                    {% if request.user.is_superuser %} <a href="{% url 'deletepost' each.id %}" class="btn btn-danger"
+                        title="Delete"> <i class="fa fa-trash"></i> </a>
+                    {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-danger"> You have not posted any post. Click on Add New Post to add post.</div>
+    {% endif %}
+</div>
+{% endblock maincontent %}

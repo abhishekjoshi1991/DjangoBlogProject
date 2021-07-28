@@ -4,9 +4,8 @@ input[type=submit] {
     color:black;
     font-weight: 500;
 }
-/* input[type=submit]:hover {
-    background:rgb(166, 186, 0);
-    border:none;
-    color:black;
-    font-weight: 500;
-} */
+
+
+span{
+    color:red;
+}
